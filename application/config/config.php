@@ -23,7 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/food-festival/';
+$config['base_url'] = 'http://192.168.0.107/food-festival/';
+// $config['base_url'] = 'http://localhost/food-festival/';
 
 /*
 |--------------------------------------------------------------------------
@@ -146,7 +147,7 @@ spl_autoload_register("load_base_controllers");
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = FCPATH .'vendor/autoload.php';;
 
 /*
 |--------------------------------------------------------------------------

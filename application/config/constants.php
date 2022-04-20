@@ -92,6 +92,10 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('ADMIN_URI', 'admin');
 
 define('TBL_ITEMS', 'items');
+define('TBL_ORDERS', 'orders');
+define('TBL_ORDER_ITEMS', 'order_items');
+define('TBL_CUSTOMERS', 'customers');
 define('TBL_CATEGORIES', 'categories');
-define('TBL_TASK_DETAILS', 'task_details');
 define('TBL_USERS', 'users');
+
+define('COOKIE_NAME', 'NISL_FOOD_FESTIVAL');

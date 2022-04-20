@@ -58,6 +58,7 @@
                                     <option value="hrd">HRD</option>
                                     <option value="mobile">Mobile</option>
                                     <option value="marketing">Marketing</option>
+                                    <option value="marketing">Dot Net</option>
                                 </select>
                             </div>
                         </div>
@@ -87,13 +88,9 @@
     				</div>
                     <div class="form-group">
                         <label class="checkbox-inline">
-                            <input type="checkbox" class="styled" name="remember" <?php if (get_cookie('email_cookie')!=null)
-                            {
-                                echo "checked";
-                            } ?>>
+                            <input type="checkbox" class="styled" name="remember" <?php if (get_cookie('email_cookie')!=null) { echo 'checked'; } ?>>
                             <?php _el('remember_me') ?>
                         </label>
-                        <a class="pull-right" href="<?php echo site_url('authentication/forgot_password'); ?>"><?php _el('forgot_password') ?></a>
                     </div>	
     				<button type="submit" class="btn btn-primary"><?php _el('login') ?></button>
     			</form>

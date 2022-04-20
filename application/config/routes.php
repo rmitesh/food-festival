@@ -49,26 +49,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'home';
+$route['default_controller'] = 'Home';
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = TRUE;
 
-$route['/'] = 'home/index';
-$route['/stall/(:any)'] = 'stall/index/$1';
-$route['item'] = 'item/index';
-$route['item/create'] = 'item/create';
-$route['item/(:num)/edit'] = 'item/edit/$1';
+$route['/'] = 'Home/index';
 
-$route['project'] = 'ProjectController/index';
-$route['project/(:num)/edit'] = 'ProjectController/edit/$1';
-$route['project/new'] = 'ProjectController/add_new';
+$route['customer'] = 'Customer/index';
+$route['customer/welcome'] = 'Customer/welcome';
+$route['customer/my-orders'] = 'Customer/my_orders';
+$route['customer/logout'] = 'Customer/logout';
 
-/* Updates */
-$route['updates'] = 'UpdateController/index';
-$route['select-project'] = 'UpdateController/select_project';
-$route['updates/new/(:num)'] = 'UpdateController/new_update/$1';
-$route['updates/view/(:num)/(:any)'] = 'UpdateController/view_update/$1/$2';
-$route['updates/delete/(:num)/(:any)'] = 'UpdateController/delete_update/$1/$2';
+$route['stall/(:any)'] = 'Stall/index/$1';
+$route['stall/(:any)/place-order'] = 'Stall/place_order/$1';
 
-$route['updates/weekly-update'] = 'UpdateController/weekly_update';
-$route['weekly/(:num)'] = 'UpdateController/weekly_update/$1';
+$route['item'] = 'Item/index';
+$route['item/create'] = 'Item/create';
+$route['item/(:num)/edit'] = 'Item/edit/$1';

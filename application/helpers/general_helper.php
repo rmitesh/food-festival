@@ -1,5 +1,12 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
+function get_customer() {
+	if (isset($_COOKIE[COOKIE_NAME])) {
+		return unserialize($_COOKIE[COOKIE_NAME]);
+	}
+	return array();
+}
+
 function pr( $value, $die = 0 )
 {
 	echo "<pre>";

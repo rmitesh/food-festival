@@ -1,36 +1,47 @@
-function copy( $elem ) {
-    if ( $elem.length ) {
-        var target = $elem[0];
-        var range, select;
-        if (document.createRange) {
-            range = document.createRange();
-            range.selectNode(target)
-            select = window.getSelection();
-            select.removeAllRanges();
-            select.addRange(range);
-            document.execCommand('copy');
-            select.removeAllRanges();
-        } else {
-            range = document.body.createTextRange();
-            range.moveToElementText(target);
-            range.select();
-            document.execCommand('copy');
-        }
-    }
-}
+$.validator.setDefaults({
+    ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
+    highlight: function(element, errorClass) {
+        $(element).removeClass(errorClass);
+    },
+    unhighlight: function(element, errorClass) {
+        $(element).removeClass(errorClass);
+    },
 
-/* Remove tasks from the list */
-$(document).on('click', '.remove-task', function(event) {
-    event.preventDefault();
-    let href = $(this).attr('href');
-    swal({
-        title: "Are you sure you want to delete this?",
-        text: "You will not be able to recover this record after deletion.",
-        type: "warning",
-        showCancelButton: true,
-        cancelButtonText: "No, Cancel It",
-        confirmButtonText: "Yes, I am sure",
-    }, () => {
-        window.location.href = href;
-    });
+    // Different components require proper error label placement
+    errorPlacement: function(error, element) {
+
+        // Styled checkboxes, radios, bootstrap switch
+        if (element.parents('div').hasClass("checker") || element.parents('div').hasClass("choice") || element.parent().hasClass('bootstrap-switch-container') ) {
+            if(element.parents('label').hasClass('checkbox-inline') || element.parents('label').hasClass('radio-inline')) {
+                error.appendTo( element.parent().parent().parent().parent() );
+            }
+             else {
+                error.appendTo( element.parent().parent().parent().parent().parent() );
+            }
+        }
+
+        // Unstyled checkboxes, radios
+        else if (element.parents('div').hasClass('checkbox') || element.parents('div').hasClass('radio')) {
+            error.appendTo( element.parent().parent().parent() );
+        }
+
+        // Input with icons and Select2
+        else if (element.parents('div').hasClass('has-feedback') || element.hasClass('select2-hidden-accessible')) {
+            error.appendTo( element.parent() );
+        }
+
+        // Inline checkboxes, radios
+        else if (element.parents('label').hasClass('checkbox-inline') || element.parents('label').hasClass('radio-inline')) {
+            error.appendTo( element.parent().parent() );
+        }
+
+        // Input group, styled file input
+        else if (element.parent().hasClass('uploader') || element.parents().hasClass('input-group')) {
+            error.appendTo( element.parent().parent() );
+        }
+
+        else {
+            error.insertAfter(element);
+        }
+    },
 });

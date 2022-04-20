@@ -18,7 +18,10 @@ class Item_model extends MY_Model
 	}
 
 
-	public function get_items() {
+	public function get_items( $user_id = null ) {
+		if (empty($user_id)) {
+			$user_id = get_loggedin_user_id();
+		}
 		$this->db->select([
 			'item.id', 'item.name', 'item.price', 'category.name AS category_name', 'item.created_at',
 		]);
@@ -27,7 +30,7 @@ class Item_model extends MY_Model
 		$this->db->join( TBL_CATEGORIES . ' AS category', 'item.category_id = category.id' );
 
 		$this->db->where([
-			'item.user_id' => get_loggedin_user_id(),
+			'item.user_id' => $user_id,
 		]);
 
 		$this->db->order_by('item.updated_at', 'desc');
