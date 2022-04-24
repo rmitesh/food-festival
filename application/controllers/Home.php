@@ -8,7 +8,10 @@ class Home extends Frontend_Controller
 {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('User_model', 'user');
+		$this->load->model(array(
+			'User_model' => 'user',
+			'Item_model' => 'item',
+		));
 	}
 
 	public function index() {
@@ -19,7 +22,11 @@ class Home extends Frontend_Controller
 			redirect(site_url());
 		}
 
+		$items = $this->item->get_items();
+		$this->data['items'] = $items;
+
 		$stall_no = get_user_info(get_loggedin_user_id(), 'stall_no');
+		$stall_name = get_user_info(get_loggedin_user_id(), 'stall_name');
 		$stall_url = '';
 		$this->data['stall_no'] = $stall_no;
 		if ($stall_no) {
@@ -27,7 +34,8 @@ class Home extends Frontend_Controller
 			$stall_url = (new QRCode)->render($stall_url);
 		}
 		$this->data['stall_url'] = $stall_url;
-		$this->set_page_title('Welcome');
+		$this->data['stall_name'] = $stall_name;
+		$this->set_page_title('Welcome Stall Owner');
 		$this->template->load( 'index', 'content', 'user/index', $this->data );
 	}
 

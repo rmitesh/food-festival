@@ -31,11 +31,11 @@ class Authentication_model extends MY_Model
 	 *
 	 * @return bool  True if valid user found, False otherwise
 	 */
-	public function login( $email, $password, $is_stall_owner, $remember ) {
+	public function login( $email, $password, $remember ) {
 
 		if ( ( !empty( $email ) ) && ( !empty( $password ) ) ) {
 
-			$this->db->where( array('email' => $email, 'role' => $is_stall_owner) );
+			$this->db->where( array('email' => $email) );
 			$user = $this->db->get('users')->row();
 
 			if ( $user ) {
@@ -52,7 +52,7 @@ class Authentication_model extends MY_Model
 			}
 
 			$user_data = [
-				'role' => $is_stall_owner,
+				'role' => $user->role,
 				'user_id' => $user->id,
 				'email' => $user->email,
 				'username' => ucwords($user->first_name.' '.$user->last_name),

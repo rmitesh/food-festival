@@ -45,3 +45,7 @@ $.validator.setDefaults({
         }
     },
 });
+
+$(document).ready(function() {
+    $('select').select2();
+});

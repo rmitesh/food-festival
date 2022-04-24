@@ -12,10 +12,7 @@ class Item extends Frontend_Controller {
 	}
 
 	public function index() {
-		$this->set_page_title('Items');
-		$items = $this->item->get_items();
-		$this->data['items'] = $items;
-		$this->template->load( 'index', 'content', 'user/item/index', $this->data );
+		redirect(site_url());
 	}
 
 	public function create() {
@@ -26,7 +23,7 @@ class Item extends Frontend_Controller {
 
 			if ($this->item->insert($data)) {
 				set_alert('success', 'New items has been added.');
-				redirect(site_url('item'));
+				redirect(site_url());
 			} else {
 				set_alert('error', 'Something went wrong while creating item.');
 				redirect(site_url('item/create'));
@@ -46,7 +43,7 @@ class Item extends Frontend_Controller {
 	public function edit($id) {
 		if (!is_numeric($id)) {
 			set_alert('error', 'Something went wrong.');
-			redirect(site_url('item'));
+			redirect(site_url());
 		}
 
 		if ($this->input->post()) {
@@ -54,7 +51,7 @@ class Item extends Frontend_Controller {
 			$data['updated_at'] = date('Y-m-d h:i:s');
 			if ($this->item->update($id, $data)) {
 				set_alert('success', 'Items has been updated.');
-				redirect(site_url('item'));
+				redirect(site_url());
 			} else {
 				set_alert('error', 'Something went wrong while updating item.');
 				redirect(site_url('item/create'));
@@ -72,6 +69,15 @@ class Item extends Frontend_Controller {
 		$this->data['categories'] = $categories;
 
 		$this->template->load( 'index', 'content', 'user/item/edit', $this->data );
+	}
+
+	public function destory( $id ) {
+		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			if ($this->item->delete($id)) {
+				set_alert('success', 'Items has been deleted.');
+			}
+		}
+		redirect(site_url());
 	}
 
 }

@@ -19,14 +19,13 @@ class Authentication extends My_Controller
 		if ( is_user_logged_in() ) {
 			redirect( site_url() );
 		}
-		$is_stall_entry_open = get_settings('is_stall_entry_open');
+		// $is_stall_entry_open = get_settings('is_stall_entry_open');
 		if ( $this->input->post() ) {
-			$is_stall_owner = $this->input->post('is_stall_owner');
 			$email = $this->input->post('email');
 			$password = $this->input->post('password');
 			$remember = $this->input->post('remember');
 
-			$user = $this->Authentication_model->login($email, $password, $is_stall_owner, $remember);
+			$user = $this->Authentication_model->login($email, $password, $remember);
 
 			if ( is_array( $user ) && isset( $user['user_inactive'] ) ) {
 				set_alert('error', _l('your_account_is_not_active'));
@@ -52,34 +51,28 @@ class Authentication extends My_Controller
 
 			log_activity("User Logged In [Email: $email]");
 
-			//If previous redirect URL is set in session, redirect to that URL
-			maybe_redirect_to_previous_url();
-
-			//Else rediret to home page.
 			redirect(site_url());
 		}
-		$this->data['is_stall_entry_open'] = $is_stall_entry_open;
+		// $this->data['is_stall_entry_open'] = $is_stall_entry_open;
 		$this->set_page_title('Login');
-		$this->template->load('index', 'content', 'user/authentication/login_signup', $this->data);
+		$this->template->load('index', 'content', 'user/authentication/login');
 	}
 
-	public function signup()
-	{
-		if ($this->input->post())
-		{
+	public function signup() {
+		if ($this->input->post()) {
 			$data = $this->input->post();
 			$data['password'] = md5($data['password']);
 			unset($data['confirm_password']);
 			$data['role'] = 1;
 			$data['is_active'] = 1;
 			if ($this->users->insert($data)) {
-				set_alert('success', 'Your stall has been registered, please login and follow the steps.');
-				redirect(site_url('authentication?login=1'));
+				set_alert('success', 'You are registered in the Food Festival, Please login and follow the steps.');
+				redirect(site_url('authentication'));
 			}
 		}
 
 		$this->set_page_title('Sign Up');
-		$this->template->load('index', 'content', 'authentication/login_signup');
+		$this->template->load('index', 'content', 'user/authentication/signup');
 	}
 
 	public function verify_email($signup_key = '')

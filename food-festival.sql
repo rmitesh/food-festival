@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2022 at 11:50 PM
+-- Generation Time: Apr 24, 2022 at 01:52 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -72,6 +72,14 @@ CREATE TABLE `customers` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `phone_number`, `refer_employee`, `created_at`, `updated_at`) VALUES
+(1, '9081448984', 'mra', '2022-04-20 19:37:16', '2022-04-20 19:37:16'),
+(2, '8734037576', 'vpt', '2022-04-20 21:40:00', '2022-04-20 21:40:00');
+
 -- --------------------------------------------------------
 
 --
@@ -88,6 +96,16 @@ CREATE TABLE `items` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`id`, `user_id`, `category_id`, `name`, `price`, `created_at`, `updated_at`) VALUES
+(1, 3, 3, 'Cola', 25, '2022-04-19 18:53:19', '2022-04-20 07:10:53'),
+(3, 3, 1, 'Vadapav', 15, '2022-04-23 09:45:30', '2022-04-23 09:45:30'),
+(4, 3, 1, 'Dabeli', 20, '2022-04-23 09:45:50', '2022-04-23 09:45:50'),
+(5, 3, 2, 'Corn Chaat', 30, '2022-04-23 09:46:18', '2022-04-23 09:46:18');
+
 -- --------------------------------------------------------
 
 --
@@ -102,6 +120,16 @@ CREATE TABLE `orders` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `owner_id`, `customer_id`, `total_amount`, `created_at`) VALUES
+(3, 3, 1, 25, '2022-04-20 19:49:56'),
+(4, 3, 1, 25, '2022-04-20 19:53:55'),
+(6, 3, 1, 75, '2022-04-20 21:14:08'),
+(7, 3, 2, 50, '2022-04-20 21:41:04');
+
 -- --------------------------------------------------------
 
 --
@@ -114,6 +142,16 @@ CREATE TABLE `order_items` (
   `item_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `item_id`, `quantity`) VALUES
+(1, 3, 1, 1),
+(2, 4, 1, 1),
+(3, 6, 1, 3),
+(4, 7, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -153,10 +191,18 @@ CREATE TABLE `users` (
   `password` varchar(110) NOT NULL,
   `department` varchar(20) NOT NULL,
   `stall_no` varchar(11) DEFAULT NULL,
+  `stall_name` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   `is_deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `role`, `is_active`, `is_admin`, `first_name`, `last_name`, `mobile_no`, `email`, `password`, `department`, `stall_no`, `stall_name`, `created_at`, `updated_at`, `is_deleted`) VALUES
+(3, 1, 1, 0, 'Viral', 'Patel', 4568745895, 'vpt@narola.email', '5f4dcc3b5aa765d61d8327deb882cf99', 'php', 'NISL-S-15', 'PHP Food Stall', '2022-04-19 18:14:00', '2022-04-19 18:14:00', 0);
 
 --
 -- Indexes for dumped tables
@@ -224,31 +270,31 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

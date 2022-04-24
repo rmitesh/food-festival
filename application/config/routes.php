@@ -53,7 +53,7 @@ $route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
 
-$route['/'] = 'Home/index';
+// for customers route start
 
 $route['customer'] = 'Customer/index';
 $route['customer/welcome'] = 'Customer/welcome';
@@ -63,6 +63,15 @@ $route['customer/logout'] = 'Customer/logout';
 $route['stall/(:any)'] = 'Stall/index/$1';
 $route['stall/(:any)/place-order'] = 'Stall/place_order/$1';
 
+// for customers route end
+
+// for food stall owners start
+
+$route['profile'] = 'Profile/index';
+
 $route['item'] = 'Item/index';
 $route['item/create'] = 'Item/create';
 $route['item/(:num)/edit'] = 'Item/edit/$1';
+$route['item/(:num)/destory'] = 'Item/destory/$1';
+
+// for food stall owners end
