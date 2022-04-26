@@ -7,6 +7,8 @@ class Profile extends Frontend_Controller {
 		parent::__construct();
 		$this->load->model(array(
 			'User_model' => 'user',
+			'Department_model' => 'department',
+			'Stall_owner_model' => 'stall_owner',
 		));
 	}
 
@@ -22,7 +24,7 @@ class Profile extends Frontend_Controller {
 		}
 
 		$this->db->select(array(
-			'id', 'first_name', 'last_name', 'email', 'mobile_no', 'department',
+			'id', 'first_name', 'last_name', 'email_id', 'contact_number', 'dept_id',
 		));
 		$this->data['user'] = $this->user->get($user_id);
 		$this->template->load( 'index', 'content', 'user/profile/index', $this->data );

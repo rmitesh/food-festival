@@ -44,6 +44,6 @@ class Admin_Controller extends My_Controller
 		$data['content'] = $this->load->view('admin/includes/access_denied', '', TRUE);
 		$this->load->view('admin/layouts/index', $data);
 
-		log_activity("User tried to access the page without permission [$feature, $capability]");
+		// log_activity("User tried to access the page without permission [$feature, $capability]");
 	}
 }

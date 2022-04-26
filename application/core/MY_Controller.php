@@ -26,9 +26,9 @@ class MY_Controller extends CI_Controller
 	 */
 	public function set_page_title($page_title) {
 		if (strpos(current_full_url(), '/admin') == true) {
-			$this->page_title = get_settings('company_name').' | Admin Panel | '.$page_title;
+			$this->page_title = APP_NAME.' | Admin Panel | '.$page_title;
 		} else {
-			$this->page_title = $page_title .' | '. get_settings('company_name');
+			$this->page_title = $page_title .' | '. APP_NAME;
 		}
 	}
 }

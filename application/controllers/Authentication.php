@@ -5,8 +5,12 @@ class Authentication extends My_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Authentication_model');
-		$this->load->model('User_model', 'users');
+		$this->load->model(array(
+			'Authentication_model',
+			'User_model' => 'users',
+			'Department_model' => 'department',
+			'Stall_owner_model' => 'stall_owner',
+		));
 	}
 
 	public function index()
@@ -27,29 +31,41 @@ class Authentication extends My_Controller
 
 			$user = $this->Authentication_model->login($email, $password, $remember);
 
+			
 			if ( is_array( $user ) && isset( $user['user_inactive'] ) ) {
 				set_alert('error', _l('your_account_is_not_active'));
-				log_activity("Inactive User Tried to Login [Email: $email]", $user['id']);
+				// log_activity("Inactive User Tried to Login [Email: $email]", $user['id']);
 				redirect( site_url('authentication') );
 			} elseif ( is_array( $user ) && isset( $user['email_unverified'] ) ) {
 				set_alert('error', 'Your email is not verified. Please verify your email first.');
-				log_activity("Non Verified User Tried to Login [Email: $email]");
+				// log_activity("Non Verified User Tried to Login [Email: $email]");
 				redirect( site_url('authentication') );
 			} elseif (is_array( $user ) && isset( $user['invalid_email'] ) ) {
 				set_alert('error', _l('incorrect_email'));
-				log_activity("Non Existing User Tried to Login [Email: $email]");
+				// log_activity("Non Existing User Tried to Login [Email: $email]");
 				redirect( site_url('authentication') );
 			} elseif ( is_array( $user ) && isset( $user['invalid_password'] ) ) {
 				set_alert('error', _l('incorrect_password'));
-				log_activity("Failed Login Attempt With Incorrect Password [Email: $email]", $user['id']);
+				// log_activity("Failed Login Attempt With Incorrect Password [Email: $email]", $user['id']);
 				redirect(site_url('authentication'));
 			} elseif ( $user == false ) {
 				set_alert('error', _l('incorrect_email_or_password'));
-				log_activity("Failed Login Attempt [Email: $email]");
+				// log_activity("Failed Login Attempt [Email: $email]");
 				redirect(site_url('authentication'));
 			}
 
-			log_activity("User Logged In [Email: $email]");
+			// log_activity("User Logged In [Email: $email]");
+
+			// redirect to the stall owner profile
+			if (get_loggedin_info('role') == 1) {
+				$stall_config = $this->stall_owner->get_by(array(
+					'user_id' => get_loggedin_info('user_id'),
+				));
+
+				if (empty($stall_owner)) {
+					redirect(site_url('profile'));
+				}
+			}
 
 			redirect(site_url());
 		}
@@ -61,18 +77,29 @@ class Authentication extends My_Controller
 	public function signup() {
 		if ($this->input->post()) {
 			$data = $this->input->post();
-			$data['password'] = md5($data['password']);
+			// $data['password'] = md5($data['password']);
+			// $data['password'] = $data['password'];
 			unset($data['confirm_password']);
-			$data['role'] = 1;
-			$data['is_active'] = 1;
+			$data['role_id'] = 1;
+			// $data['is_active'] = 1;
 			if ($this->users->insert($data)) {
 				set_alert('success', 'You are registered in the Food Festival, Please login and follow the steps.');
 				redirect(site_url('authentication'));
 			}
 		}
 
+		$this->db->select(array(
+			'id', 'dept_name',
+		));
+		$this->db->order_by('dept_name', 'asc');
+		$departments = $this->department->get_all();
+
+		$this->data = array(
+			'departments' =>  $departments,
+		);
+
 		$this->set_page_title('Sign Up');
-		$this->template->load('index', 'content', 'user/authentication/signup');
+		$this->template->load('index', 'content', 'user/authentication/signup', $this->data);
 	}
 
 	public function verify_email($signup_key = '')
@@ -172,7 +199,7 @@ class Authentication extends My_Controller
 			elseif ($success == true)
 			{
 				set_alert('success', _l('password_reset_message'));
-				log_activity('User Resetted the Password', $user_id);
+				// log_activity('User Resetted the Password', $user_id);
 			}
 			else
 			{
@@ -200,7 +227,7 @@ class Authentication extends My_Controller
 	 */
 	public function logout()
 	{
-		log_activity('User Logged Out [Email: '.get_loggedin_info('email').']', get_loggedin_user_id());
+		// log_activity('User Logged Out [Email: '.get_loggedin_info('email').']', get_loggedin_user_id());
 		$this->Authentication_model->logout();
 		redirect(site_url());
 	}

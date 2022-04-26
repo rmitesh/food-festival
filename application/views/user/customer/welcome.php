@@ -3,7 +3,7 @@
 
 	<section class="row justify-content-center">
 		<div class="col-lg-12 col-sm-12">
-			<h4>Welcome to <?php echo get_settings('company_name'); ?></h4>
+			<h4>Welcome to <?php echo APP_NAME; ?></h4>
 			<div class="alert alert-info" role="alert">
 			  <h4 class="alert-heading">Well done!</h4>
 			  <p>You have successfully logged in.</p>

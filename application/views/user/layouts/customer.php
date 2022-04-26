@@ -19,7 +19,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <?php if (isset($stall['stall_no'])): ?>
-            <a class="navbar-brand" href="<?php echo site_url('stall/'.$stall['stall_no']); ?>"><?php echo get_settings('company_name'); ?></a>
+            <a class="navbar-brand" href="<?php echo site_url('stall/'.$stall['stall_no']); ?>"><?php echo APP_NAME; ?></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,7 +36,7 @@
                 </ul>
             </div>
         <?php else: ?>
-            <a class="navbar-brand" href="<?php echo site_url('customer'); ?>"><?php echo get_settings('company_name'); ?></a>
+            <a class="navbar-brand" href="<?php echo site_url('customer'); ?>"><?php echo APP_NAME; ?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -61,7 +61,7 @@
 	<section class="p-2 footer-bottom-custom bg-light">
         <hr class="mt-0 border-0">
         <footer class="mr-5 text-right">
-            <p class="mr-3">Developed By &copy; Mitesh Rathod (MRA) - <?php echo date('Y') ?> <?php echo get_settings('company_name'); ?></a></p>
+            <p class="mr-3">Developed By &copy; Mitesh Rathod (MRA) - <?php echo date('Y') ?> <?php echo APP_NAME; ?></a></p>
         </footer>
         <script type="text/javascript">
             const BASE_URL = '<?php echo base_url(); ?>';

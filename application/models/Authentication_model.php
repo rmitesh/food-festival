@@ -12,7 +12,7 @@ class Authentication_model extends MY_Model
 	/**
 	 * @var string
 	 */
-	protected $soft_delete_key = 'is_deleted';
+	protected $soft_delete_key = 'is_delete';
 
 	/**
 	 * Constructor for the class
@@ -35,11 +35,12 @@ class Authentication_model extends MY_Model
 
 		if ( ( !empty( $email ) ) && ( !empty( $password ) ) ) {
 
-			$this->db->where( array('email' => $email) );
+			$this->db->where( array('email_id' => $email) );
 			$user = $this->db->get('users')->row();
 
 			if ( $user ) {
-				if ( $user->password != md5( $password ) ) {
+				// if ( $user->password != md5( $password ) ) {
+				if ( $user->password != $password ) {
 					return [
 						'invalid_password' => true,
 						'id' => $user->id,
@@ -52,11 +53,11 @@ class Authentication_model extends MY_Model
 			}
 
 			$user_data = [
-				'role' => $user->role,
+				'role' => $user->role_id,
 				'user_id' => $user->id,
-				'email' => $user->email,
+				'email' => $user->email_id,
+				'dept_id' => $user->dept_id,
 				'username' => ucwords($user->first_name.' '.$user->last_name),
-				'is_admin' => $user->is_admin,
 				'user_logged_in' => true,
 			];
 

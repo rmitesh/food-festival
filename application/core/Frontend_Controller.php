@@ -13,7 +13,7 @@ class Frontend_Controller extends My_Controller
 	{
 		parent::__construct();
 
-		$this->load->model('setting_model', 'settings');
+		// $this->load->model('setting_model', 'settings');
 
 		/* If user is not logged in, redirect to the login page */
 		if ( !is_user_logged_in() ) {

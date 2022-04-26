@@ -2,7 +2,7 @@
 	<?php $this->load->view('user/includes/alerts'); ?>
 	<div class="row justify-content-center">
         <div class="col-md-4">
-            <h2 class="text-primary"><?php echo get_settings('company_name'); ?></h2>
+            <h2 class="text-primary"><?php echo APP_NAME; ?></h2>
             <hr/>
             <form id="login_form" autocomplete="off" method="post" action="<?php echo site_url('authentication/'); ?>">
                 <input type="hidden" name="is_stall_owner" value="<?php echo (isset($_GET['login']) && $_GET['login'] == 1) ?>" />

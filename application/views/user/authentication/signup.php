@@ -2,7 +2,7 @@
 	<?php $this->load->view('user/includes/alerts'); ?>
 	<div class="row justify-content-center">
         <div class="col-md-8">
-            <h2 class="text-primary"><?php echo get_settings('company_name'); ?></h2>
+            <h2 class="text-primary"><?php echo APP_NAME; ?></h2>
             <hr/>
 
             <form id="signup_form" autocomplete="off" method="post" action="<?php echo site_url('authentication/signup') ?>">
@@ -24,14 +24,21 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="font-weight-bold text-primary" for="email">Email <small class="text-danger">*</small></label>
-                            <input type="email" class="form-control" placeholder="Email" id="email" name="email" class="email" required />
+                            <input type="email" class="form-control" placeholder="Email" id="email" name="email_id" required />
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="font-weight-bold text-primary" for="mobile_no">Phone <small class="text-danger">*</small></label>
-                            <input type="text" class="form-control" placeholder="Phone" id="mobile_no" name="mobile_no" required />
+                            <label class="font-weight-bold text-primary" for="spark_id">Spark ID <small class="text-danger">*</small></label>
+                            <input type="text" class="form-control" placeholder="Spark ID" id="spark_id" name="spark_id" required />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="font-weight-bold text-primary" for="contact_number">Contact Number <small class="text-danger">*</small></label>
+                            <input type="text" class="form-control" placeholder="Contact Number" id="contact_number" name="contact_number" required />
                         </div>
                     </div>
 
@@ -50,15 +57,12 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="font-weight-bold text-primary" for="department">Department <small class="text-danger">*</small></label>
-                            <select name="department" id="department" class="form-control" required>
+                            <label class="font-weight-bold text-primary" for="dept_id">Department <small class="text-danger">*</small></label>
+                            <select name="dept_id" id="dept_id" class="form-control" required>
                                 <option value="">-- Select Department --</option>
-                                <option value="php">PHP</option>
-                                <option value="qa">QA</option>
-                                <option value="hrd">HRD</option>
-                                <option value="mobile">Mobile</option>
-                                <option value="marketing">Marketing</option>
-                                <option value="marketing">Dot Net</option>
+                                <?php foreach ($departments as $department): ?>
+                                    <option value="<?php echo $department['id'] ?>"><?php echo $department['dept_name'] ?></option>
+                                <?php endforeach ?>
                             </select>
                         </div>
                     </div>
@@ -106,7 +110,7 @@
             last_name: {
                 required: true,
             },
-            mobile_no: {
+            contact_number: {
                 required: true,
                 number: true,
                 minlength:10,

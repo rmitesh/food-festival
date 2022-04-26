@@ -51,7 +51,8 @@ function is_user_logged_in()
 {
 	if (get_instance()->session->has_userdata('user_logged_in'))
 	{
-		return get_user_info(get_instance()->session->userdata('user_id'), 'is_active');
+		return true;
+		// return get_user_info(get_instance()->session->userdata('user_id'), 'is_active');
 	}
 
 	return false;
@@ -152,6 +153,7 @@ function _el($line, $label = '')
  */
 function get_settings($name = '')
 {
+	return $name;
 	$CI = &get_instance();
 	$CI->load->model('setting_model', 'settings');
 

@@ -19,9 +19,9 @@
 <body>
     <nav class="navbar navbar-light bg-white navbar-expand-lg fixed-top border-bottom border-primary shadow-sm">
         <a class="navbar-brand d-flex flex-column" href="<?php echo site_url(); ?>">
-            <img style="width: 40%!important;" src="<?php echo base_url('assets/img/narola-infotech.png') ?>" alt="<?php echo get_settings('company_name'); ?>" />
+            <img style="width: 40%!important;" src="<?php echo base_url('assets/img/narola-infotech.png') ?>" alt="<?php echo APP_NAME; ?>" />
             <h6 class="text-primary mt-2" style="margin-left: 2.2rem;">
-                <?php echo get_settings('company_name'); ?>
+                <?php echo APP_NAME; ?>
             </h6>
         </a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
