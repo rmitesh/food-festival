@@ -17,57 +17,29 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/custom/common.js'); ?>"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <?php if (isset($stall['stall_no'])): ?>
-            <a class="navbar-brand" href="<?php echo site_url('stall/'.$stall['stall_no']); ?>"><?php echo APP_NAME; ?></a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-light bg-white navbar-expand-lg fixed-top border-bottom border-primary shadow-sm">
+        <a class="navbar-brand d-flex flex-column" href="<?php echo site_url(); ?>">
+            <img style="width: 40%!important;" src="<?php echo base_url('assets/img/narola-infotech.png') ?>" alt="<?php echo APP_NAME; ?>" />
+            <h6 class="text-primary mt-2" style="margin-left: 2.2rem;">
+                <?php echo APP_NAME; ?>
+            </h6>
+        </a>
+        <?php if (!empty(get_customer())): ?>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="navbar-item">
-                        <a class="nav-link" href="<?php echo site_url('stall/'.$stall['stall_no']) ?>">Menu</a>
-                    </li>
-                    <li class="navbar-item">
-                        <a class="nav-link" href="<?php echo site_url('customer/my-orders') ?>">My Orders</a>
-                    </li>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto"> 
+                    
                 </ul>
-            </div>
-        <?php else: ?>
-            <a class="navbar-brand" href="<?php echo site_url('customer'); ?>"><?php echo APP_NAME; ?></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <?php if (!empty(get_customer())): ?>
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="navbar-item">
-                            <a class="nav-link" href="<?php echo site_url('customer/my-orders') ?>">My Orders</a>
-                        </li>
-                        <li class="navbar-item">
-                            <a class="nav-link" href="<?php echo site_url('customer/logout'); ?>">Logout</a>
-                        </li>
-                    </ul>
-                <?php endif ?>
             </div>
         <?php endif ?>
     </nav>
 
-    <div class="mt-md-5">
+    <div class="mt-lg-5 pt-lg-4">
         <?php echo $content; ?>
     </div>
-	<section class="p-2 footer-bottom-custom bg-light">
-        <hr class="mt-0 border-0">
-        <footer class="mr-5 text-right">
-            <p class="mr-3">Developed By &copy; Mitesh Rathod (MRA) - <?php echo date('Y') ?> <?php echo APP_NAME; ?></a></p>
-        </footer>
-        <script type="text/javascript">
-            const BASE_URL = '<?php echo base_url(); ?>';
-            $('select').select2();
-        </script>
-    </section>
+
     <?php
         if ( isset( $footer_js ) ) {
             foreach ( $footer_js as $js ) {

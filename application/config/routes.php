@@ -69,9 +69,9 @@ $route['stall/(:any)/place-order'] = 'Stall/place_order/$1';
 
 $route['profile'] = 'Profile/index';
 
-$route['item'] = 'Item/index';
-$route['item/create'] = 'Item/create';
-$route['item/(:num)/edit'] = 'Item/edit/$1';
-$route['item/(:num)/destory'] = 'Item/destory/$1';
+$route['menu'] = 'Menu/index';
+$route['menu/create'] = 'Menu/create';
+$route['menu/(:num)/edit'] = 'Menu/edit/$1';
+$route['menu/(:num)/destory'] = 'Menu/destory/$1';
 
 // for food stall owners end

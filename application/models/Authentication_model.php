@@ -57,6 +57,7 @@ class Authentication_model extends MY_Model
 				'user_id' => $user->id,
 				'email' => $user->email_id,
 				'dept_id' => $user->dept_id,
+				'spark_id' => $user->spark_id,
 				'username' => ucwords($user->first_name.' '.$user->last_name),
 				'user_logged_in' => true,
 			];

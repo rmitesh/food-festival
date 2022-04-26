@@ -94,6 +94,9 @@ define('APP_NAME', 'Food Festival');
  */
 define('ADMIN_URI', 'admin');
 
+define('TBL_STALL_OWNER', 'stall_owner');
+define('TBL_DEPARTMENT', 'department');
+
 define('TBL_ITEMS', 'items');
 define('TBL_ORDERS', 'orders');
 define('TBL_ORDER_ITEMS', 'order_items');

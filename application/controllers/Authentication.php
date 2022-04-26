@@ -62,7 +62,7 @@ class Authentication extends My_Controller
 					'user_id' => get_loggedin_info('user_id'),
 				));
 
-				if (empty($stall_owner)) {
+				if (empty($stall_config)) {
 					redirect(site_url('profile'));
 				}
 			}
